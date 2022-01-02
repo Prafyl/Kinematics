@@ -2,6 +2,7 @@ import React, { useState, useReducer } from "react";
 
 import gravityFinder from "./PlanetChecker";
 import Input from "../../Ui/Input";
+import Options from "../../Ui/Options";
 
 const reducerFunction = (state, action) => {
   switch (action.type) {
@@ -27,6 +28,7 @@ const reducerFunction = (state, action) => {
 };
 
 const Form = (props) => {
+  const [answer, setAnswer] = useState({ range: 0, height: 0, time: 0 });
   const [inputData, dispatchInputData] = useReducer(reducerFunction, {
     velocity: 0,
     angle: 0,
@@ -42,7 +44,7 @@ const Form = (props) => {
   const angleChangeHandler = (event) => {
     dispatchInputData({
       type: "angle",
-      angle: +event.target.value,
+      angle: (+event.target.value * Math.PI) / 180,
     });
   };
   const gravityChangeHandler = (event) => {
@@ -51,32 +53,47 @@ const Form = (props) => {
       gravity: gravityFinder(event.target.value),
     });
   };
+
+  const submitHandler = (event) => {
+    event.preventDefault();
+    setAnswer({
+      range: Math.round(
+        (inputData.velocity *
+          inputData.velocity *
+          Math.sin(inputData.angle * 2)) /
+          inputData.gravity
+      ),
+      height: Math.round(
+        (inputData.velocity *
+          inputData.velocity *
+          Math.sin(inputData.angle) *
+          Math.sin(inputData.angle)) /
+          (2 * inputData.gravity)
+      ),
+      time: Math.round(
+        (2 * inputData.velocity * Math.sin(inputData.angle)) / inputData.gravity
+      ),
+    });
+  };
   return (
     <React.Fragment>
-      <form>
-        <Input id="velocity" onInput={velocityChangeHandler} />
-        <Input id="angle" onInput={angleChangeHandler} />
-        <label htmlFor="inputPlanet">Planet</label>
-        <select id="inputPlanet" onChange={gravityChangeHandler}>
-          <option defaultValue id="9.8">
-            Earth
-          </option>
-          <option id="3.7">Mercury</option>
-          <option id="8.87">Venus</option>
-          <option id="3.71">Mars</option>
-          <option id="24.92">Jupiter</option>
-          <option id="10.44">Saturn</option>
-          <option id="9.798">Uranus</option>
-          <option id="11.15">Neptune</option>
-          <option id="0.58">Pluto</option>
-        </select>
+      <form onSubmit={submitHandler}>
+        <Input
+          id="velocity"
+          labelName="Initial Velocity"
+          onInput={velocityChangeHandler}
+        />
+        <Input
+          labelName="Angle Of Projection"
+          id="angle"
+          onInput={angleChangeHandler}
+        />
+        <Options gravityChangeHandler={gravityChangeHandler} />
         <button type="submit">Submit</button>
       </form>
-      <p>
-        {inputData.velocity}
-        {inputData.angle}
-        {inputData.gravity}
-      </p>
+      <p>Horizontal Range={answer.range}meters</p>
+      <p>Time Taken={answer.time}seconds</p>
+      <p>Maximum Height={answer.height}meters</p>
     </React.Fragment>
   );
 };
