@@ -5,7 +5,13 @@ const Input = (props) => {
       <label htmlFor={props.id}>
         {props.labelName} {"      "}
       </label>
-      <input id={props.id} onChange={props.onInput}></input>
+      <input
+        id={props.id}
+        onChange={props.onInput}
+        type={props.type}
+        min={props.min}
+        max={props.max}
+      ></input>
     </Fragment>
   );
 };

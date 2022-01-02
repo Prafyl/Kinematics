@@ -2,6 +2,7 @@ import React, { useState, useReducer } from "react";
 
 import gravityFinder from "./PlanetChecker";
 import Input from "../../Ui/Input";
+import Output from "../../Ui/Output";
 import Options from "../../Ui/Options";
 
 const reducerFunction = (state, action) => {
@@ -79,21 +80,25 @@ const Form = (props) => {
     <React.Fragment>
       <form onSubmit={submitHandler}>
         <Input
+          type="number"
           id="velocity"
           labelName="Initial Velocity"
           onInput={velocityChangeHandler}
+          min="0"
+          max="10000"
         />
         <Input
+          type="number"
           labelName="Angle Of Projection"
           id="angle"
           onInput={angleChangeHandler}
+          min="0"
+          max="90"
         />
         <Options gravityChangeHandler={gravityChangeHandler} />
         <button type="submit">Submit</button>
       </form>
-      <p>Horizontal Range={answer.range}meters</p>
-      <p>Time Taken={answer.time}seconds</p>
-      <p>Maximum Height={answer.height}meters</p>
+      <Output name={Object.keys(answer)} answer={answer} />
     </React.Fragment>
   );
 };
