@@ -1,7 +1,8 @@
 import React from "react";
+
 const Output = (props) => {
   const [name1, name2, name3] = props.name;
-  console.log(props.answer["name1"]);
+  console.log(props.answer);
   return (
     <div>
       <p id={name1}>
