@@ -1,4 +1,7 @@
 import React, { Fragment } from "react";
+
+import classes from "./Input.module.css";
+
 const Input = (props) => {
   return (
     <Fragment>
@@ -6,6 +9,8 @@ const Input = (props) => {
         {props.labelName} {"      "}
       </label>
       <input
+        placeholder={props.bgText}
+        className={classes.inputBar}
         id={props.id}
         onChange={props.onInput}
         type={props.type}

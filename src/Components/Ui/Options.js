@@ -1,9 +1,16 @@
 import React from "react";
+
+import classes from "./Options.module.css";
+
 const Options = (props) => {
   return (
     <React.Fragment>
       <label htmlFor="inputPlanet">Planet</label>
-      <select id="inputPlanet" onChange={props.gravityChangeHandler}>
+      <select
+        className={classes.optionBar}
+        id="inputPlanet"
+        onChange={props.gravityChangeHandler}
+      >
         <option defaultValue id="9.8">
           Earth
         </option>

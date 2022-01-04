@@ -4,6 +4,8 @@ import gravityFinder from "./PlanetChecker";
 import Input from "../../Ui/Input";
 import Output from "../../Ui/Output";
 import Options from "../../Ui/Options";
+import Button from "../../Ui/Button";
+import Card from "../../Ui/Card/Card";
 
 const reducerFunction = (state, action) => {
   switch (action.type) {
@@ -78,27 +80,35 @@ const Form = (props) => {
   };
   return (
     <React.Fragment>
-      <form onSubmit={submitHandler}>
-        <Input
-          type="number"
-          id="velocity"
-          labelName="Initial Velocity"
-          onInput={velocityChangeHandler}
-          min="0"
-          max="10000"
-        />
-        <Input
-          type="number"
-          labelName="Angle Of Projection"
-          id="angle"
-          onInput={angleChangeHandler}
-          min="0"
-          max="90"
-        />
-        <Options gravityChangeHandler={gravityChangeHandler} />
-        <button type="submit">Submit</button>
-      </form>
-      <Output name={Object.keys(answer)} answer={answer} />
+      <Card>
+        <form onSubmit={submitHandler}>
+          <Input
+            type="number"
+            id="velocity"
+            labelName="Initial Velocity"
+            onInput={velocityChangeHandler}
+            min="0"
+            max="10000"
+            bgText="Initial Velocity"
+          />
+          <Input
+            type="number"
+            labelName="Angle Of Projection"
+            id="angle"
+            onInput={angleChangeHandler}
+            min="0"
+            max="90"
+            bgText="Angle with horizontal"
+          />
+          <Options gravityChangeHandler={gravityChangeHandler} />
+          <Button type="submit" id="submittButton" content="Submit" />
+        </form>
+      </Card>
+
+      <Card>
+        Ouput:
+        <Output name={Object.keys(answer)} answer={answer} />
+      </Card>
     </React.Fragment>
   );
 };
