@@ -1,5 +1,7 @@
 import React from "react";
 
+import Curve from "../Cases/Case1/Curve";
+
 const Output = (props) => {
   const [name1, name2, name3] = props.name;
   return (
@@ -13,6 +15,7 @@ const Output = (props) => {
       <p id={name3}>
         {name3}={props.answer[name3]}
       </p>
+      <Curve numbers={props.answer} />
     </div>
   );
 };
