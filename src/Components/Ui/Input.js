@@ -5,9 +5,7 @@ import classes from "./Input.module.css";
 const Input = (props) => {
   return (
     <Fragment>
-      <label htmlFor={props.id}>
-        {props.labelName} {"      "}
-      </label>
+      <label htmlFor={props.id}>{props.labelName}</label>
       <input
         placeholder={props.bgText}
         className={classes.inputBar}

@@ -31,7 +31,7 @@ const reducerFunction = (state, action) => {
 };
 
 const Form = (props) => {
-  const [answer, setAnswer] = useState({ range: 0, height: 0, time: 0 });
+  const [answer, setAnswer] = useState({ range: 1, height: 1, time: 0 });
   const [inputData, dispatchInputData] = useReducer(reducerFunction, {
     velocity: 0,
     angle: 0,
@@ -78,6 +78,7 @@ const Form = (props) => {
       ),
     });
   };
+
   return (
     <React.Fragment>
       <Card>
