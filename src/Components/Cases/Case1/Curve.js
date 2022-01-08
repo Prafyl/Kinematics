@@ -47,4 +47,4 @@ const Curve = (props) => {
     </React.Fragment>
   );
 };
-export default Curve;
+export default React.memo(Curve);
